@@ -20,7 +20,6 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 */
 
 #include "matrix.h"
-#include <algorithm>
 #include <math.h>
 
 #define SWAP(a,b) {temp=a;a=b;b=temp;}

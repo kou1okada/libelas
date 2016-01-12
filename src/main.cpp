@@ -28,9 +28,15 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 using namespace std;
 
 // compute disparities of pgm image input pair file_1, file_2
+
+void elas(uchar *left, uchar *right, float *disp_out)
+{
+  
+  
+}
+
 void process (const char* file_1,const char* file_2) {
 
-  cout << "Processing: " << file_1 << ", " << file_2 << endl;
 
   // load images
   image<uchar> *I1,*I2;

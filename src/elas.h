@@ -16,7 +16,7 @@ PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along with
 libelas; if not, write to the Free Software Foundation, Inc., 51 Franklin
-Street, Fifth Floor, Boston, MA 02110-1301, USA 
+Street, Fifth Floor, Boston, MA 02110-1301, USA
 */
 
 // Main header file. Include this to use libelas in your code.
@@ -30,6 +30,7 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #include <stdlib.h>
 #include <vector>
 #include <emmintrin.h>
+//#define PROFILE 1
 
 // define fixed-width datatypes for Visual Studio projects
 #ifndef _MSC_VER
@@ -50,11 +51,11 @@ Street, Fifth Floor, Boston, MA 02110-1301, USA
 #endif
 
 class Elas {
-  
+
 public:
-  
+
   enum setting {ROBOTICS,MIDDLEBURY};
-  
+
   // parameter settings
   struct parameters {
     int32_t disp_min;               // min disparity
@@ -82,10 +83,10 @@ public:
     bool    subsampling;            // saves time by only computing disparities for each 2nd pixel
                                     // note: for this option D1 and D2 must be passed with size
                                     //       width/2 x height/2 (rounded towards zero)
-    
+
     // constructor
     parameters (setting s=ROBOTICS) {
-      
+
       // default settings in a robotics environment
       // (do not produce results in half-occluded areas
       //  and are a bit more robust towards lighting etc.)
@@ -113,7 +114,7 @@ public:
         filter_adaptive_mean  = 1;
         postprocess_only_left = 1;
         subsampling           = 0;
-        
+
       // default settings for middlebury benchmark
       // (interpolate all missing disparities)
       } else {
@@ -144,12 +145,12 @@ public:
     }
   };
 
-  // constructor, input: parameters  
+  // constructor, input: parameters
   Elas (parameters param) : param(param) {}
 
   // deconstructor
   ~Elas () {}
-  
+
   // matching function
   // inputs: pointers to left (I1) and right (I2) intensity image (uint8, input)
   //         pointers to left (D1) and right (D2) disparity image (float, output)
@@ -160,9 +161,9 @@ public:
   //               if subsampling is not active their size is width x height,
   //               otherwise width/2 x height/2 (rounded towards zero)
   void process (uint8_t* I1,uint8_t* I2,float* D1,float* D2,const int32_t* dims);
-  
+
 private:
-  
+
   struct support_pt {
     int32_t u;
     int32_t v;
@@ -211,7 +212,7 @@ private:
 
   // L/R consistency check
   void leftRightConsistencyCheck (float* D1,float* D2);
-  
+
   // postprocessing
   void removeSmallSegments (float* D);
   void gapInterpolation (float* D);
@@ -219,14 +220,14 @@ private:
   // optional postprocessing
   void adaptiveMean (float* D);
   void median (float* D);
-  
+
   // parameter set
   parameters param;
-  
+
   // memory aligned input images + dimensions
   uint8_t *I1,*I2;
   int32_t width,height,bpl;
-  
+
   // profiling timer
 #ifdef PROFILE
   Timer timer;
