@@ -2,14 +2,16 @@
 cmake_minimum_required (VERSION 2.6)
 project (libelas)
 
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # directories
 set (LIBELAS_SRC_DIR src)
 
 # include directory
 include_directories("${LIBELAS_SRC_DIR}")
 
-# use sse3 instruction set
-SET(CMAKE_CXX_FLAGS "-msse3")
+# use SIMD instruction set
+include(SIMD_TYPE)
 
 # sources
 FILE(GLOB LIBELAS_SRC_FILES "src/*.cpp")
