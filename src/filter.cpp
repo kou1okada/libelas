@@ -19,25 +19,12 @@ libelas; if not, write to the Free Software Foundation, Inc., 51 Franklin
 Street, Fifth Floor, Boston, MA 02110-1301, USA 
 */
 
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <cassert>
 
 #include "filter.h"
-
-// define fixed-width datatypes for Visual Studio projects
-#ifndef _MSC_VER
-  #include <stdint.h>
-#else
-  typedef __int8            int8_t;
-  typedef __int16           int16_t;
-  typedef __int32           int32_t;
-  typedef __int64           int64_t;
-  typedef unsigned __int8   uint8_t;
-  typedef unsigned __int16  uint16_t;
-  typedef unsigned __int32  uint32_t;
-  typedef unsigned __int64  uint64_t;
-#endif
 
 // fast filters: implements 3x3 and 5x5 sobel filters and 
 //               5x5 blob and corner filters based on SSE2/3 instructions
